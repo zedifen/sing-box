@@ -5,7 +5,6 @@ import (
 	"crypto/md5"
 	"crypto/rand"
 	"errors"
-	"github.com/docker/docker/api/types/image"
 	"io"
 	"net"
 	_ "net/http/pprof"
@@ -18,6 +17,7 @@ import (
 	"github.com/sagernet/sing/common/control"
 	F "github.com/sagernet/sing/common/format"
 
+	"github.com/docker/docker/api/types/image"
 	"github.com/docker/docker/client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
