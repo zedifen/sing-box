@@ -49,6 +49,7 @@ func newV2RayPlugin(ctx context.Context, pluginOpts Args, router adapter.Router,
 
 	host := "cloudfront.com"
 	path := "/"
+	userAgent := "Go-http-client/1.1 sing-box/1.10 SingBox/1.10"
 
 	if hostOpt, loaded := pluginOpts.Get("host"); loaded {
 		host = hostOpt
@@ -56,6 +57,9 @@ func newV2RayPlugin(ctx context.Context, pluginOpts Args, router adapter.Router,
 	}
 	if pathOpt, loaded := pluginOpts.Get("path"); loaded {
 		path = pathOpt
+	}
+	if userAgentOpt, loaded := pluginOpts.Get("userAgent"); loaded {
+		userAgent = userAgentOpt
 	}
 
 	var tlsClient tls.Config
@@ -76,6 +80,7 @@ func newV2RayPlugin(ctx context.Context, pluginOpts Args, router adapter.Router,
 			WebsocketOptions: option.V2RayWebsocketOptions{
 				Headers: map[string]option.Listable[string]{
 					"Host": []string{host},
+					"User-Agent": []string{userAgent},
 				},
 				Path: path,
 			},
