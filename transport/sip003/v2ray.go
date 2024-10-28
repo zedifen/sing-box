@@ -25,6 +25,13 @@ func newV2RayPlugin(ctx context.Context, pluginOpts Args, router adapter.Router,
 	if _, loaded := pluginOpts.Get("tls"); loaded {
 		tlsOptions.Enabled = true
 	}
+	if utlsFingerprint, utlsLoaded := pluginOpts.Get("utls"); utlsLoaded {
+		tlsOptions.Enabled = true
+		tlsOptions.UTLS = &option.OutboundUTLSOptions{
+			Enabled:     true,
+			Fingerprint: utlsFingerprint,
+		}
+	}
 	if certPath, certLoaded := pluginOpts.Get("cert"); certLoaded {
 		tlsOptions.CertificatePath = certPath
 	}
